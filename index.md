@@ -1,21 +1,19 @@
 ---
-title: "Instructie template"
-date: 2024-09-20T15:51:01+02:00
+title: "Maak je eigen kerstkaart-animatie met P5.js! 🎄 🌟"
+date: 2024-12-03T20:51:01+02:00
 draft: false
 toc: true
 headercolor: "teal-background"
-onderwerp: Python 
+onderwerp: P5js 
 ---
-
-> Korte introductie dat wordt getoond in het overzicht van alle instructies
-
-<!--more-->
 
 # Maak je eigen kerstkaart-animatie met P5.js! 🎄 🌟
 
 Zo kort voor kerst gaan we een kerstkaart programmeren, compleet met een kerstboom, kerstballen, sneeuw en een leuke kerstwens. Kun jij de sneeuwvlokken echt laten vallen?
 
-We gaan de kerstkaart maken met P5.js. Volg de stappen hieronder en ontdek hoe makkelijk en leuk een kerstkaart programmeren kan zijn!
+<!--more-->
+
+We gaan de kerstkaart maken met P5.js. Volg de handleiding stap voor stap en ontdek hoe makkelijk en leuk een kerstkaart programmeren kan zijn!
 
 ---
 
