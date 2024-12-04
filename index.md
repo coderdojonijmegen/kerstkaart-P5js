@@ -7,70 +7,66 @@ headercolor: "teal-background"
 onderwerp: P5js 
 ---
 
-# Maak je eigen kerstkaart-animatie met P5.js! 🎄 🌟
-
 Zo kort voor kerst gaan we een kerstkaart programmeren, compleet met een kerstboom, kerstballen, sneeuw en een leuke kerstwens. Kun jij de sneeuwvlokken echt laten vallen?
 
 <!--more-->
 
-We gaan de kerstkaart maken met P5.js. Volg de handleiding stap voor stap en ontdek hoe makkelijk en leuk een kerstkaart programmeren kan zijn!
+We maken de kerstkaart met P5.js. Volg de handleiding stap voor stap en speel bij elke stap met de verschillende opties!
 
 ---
-
 
 
 ## Stap 1: Maak je eerste kerstboom! 🎄
-1. **Begin met een kerstboom tekenen**:
-   - Een kerstboom heeft een stam (rechthoek) en groene takken (driehoeken).
-   - Gebruik de functies `triangle()` en `rect()`.
+1. **Ga in je browser naar <a href="https://editor.p5js.org/" target="_blank">editor.p5js.org</a>.**
+    
+    In het venster links kun je programmeren. 
+    Als je op de afspeelknop linksbovenaan klikt dan wordt je code uitgevoerd. Je ziet het resultaat in het venster rechts. Probeer het maar eens.
 
-2. **Schrijf deze code in je P5.js-project:**
+2. **Begin aan je kerstkaart.** 
+
+    Laten we beginnen door de achtergrond zwart te maken. Dat doe je door de functie `background()` een waarde van 0 te geven.
+
+    Maak je kerstkaart passend door de nummers in `createCanvas(400, 400)` te veranderen. 
+    
+    Je kunt ook de nummers vervangen door `windowWidth` en `windowHeight`, dan past het altijd, dus ook als je het venster later groter maakt:
+
    ```javascript
-   function setup() {
-     createCanvas(400, 400); // Maakt een canvas van 400 bij 400 pixels
-     background(30); // donkere achtergrondkleur
-
-     // De stam van de boom
-     rect(175, 300, 50, 100); // x, y, breedte, hoogte
-
-     // De lagen van de boom
-     fill(0, 128, 0); // Groen
-     triangle(200, 100, 120, 300, 280, 300); // Top, links, rechts
-   }
-   ```
-
-3. **Run je code**! Zie je de kerstboom? Goed gedaan! 🎉
-
----
-
-
-### **Uitleg van het coördinatenstelsel in P5.js** 🖼️
-
-P5.js gebruikt een **2D-coördinatenstelsel** om dingen te tekenen op het canvas. Hier zijn de belangrijkste punten om te begrijpen:
-
-#### **1. De oorsprong (0, 0)**
-- Het **linkerbovenhoekpunt** van het canvas is het beginpunt, oftewel de oorsprong.
-- De coördinaten van dit punt zijn `(0, 0)`.
-
-#### **2. X- en Y-coördinaten**
-- **X-coördinaat**:
-  - Loopt horizontaal.
-  - **Hoger getal = verder naar rechts.**
-- **Y-coördinaat**:
-  - Loopt verticaal.
-  - **Hoger getal = verder naar beneden.**
-
-#### **3. Een punt in P5.js**
-- Als je bijvoorbeeld een punt wilt plaatsen op `(50, 100)`:
-  - `x = 50`: 50 pixels naar rechts.
-  - `y = 100`: 100 pixels naar beneden.
-  - Gebruik de functie:
-    ```javascript
-    point(50, 100);
+     createCanvas(windowWidth, windowHeight);
     ```
 
-#### **4. Voorbeeld: Een rechthoek**
-Als je een rechthoek wilt tekenen:
+    Klik op de afspeelknop om te kijken of het goed werkt.
+
+3. **Begin met een kerstboom tekenen**:
+   - Een kerstboom heeft een stam en groene takken.
+   - Voor de stam kunnen we een rechthoek tekenen met de functie `rect()`:
+    ```javascript
+    rect(175, 300, 50, 100); // x, y, breedte, hoogte
+    ```
+   - De takken kun je tekenen met een driehoek (of met drie driehoeken half over elkaar heen). Gebruik daarvoor `triangle()`:
+
+   ```javascript
+   triangle(100,10, 60,100, 120,100); // top, links, rechts
+   ```
+
+4. **Run je code**! Zie je een kerstboom? Goed gedaan! 🎉
+
+
+### Uitleg van coördinaten in P5.js 🖼️
+
+Zoals je ziet gebruikt P5.js een **coördinatenstelsel** om vormen te tekenen op een bepaalde plek op het scherm. Dit zijn de belangrijkste punten om te begrijpen:
+
+- Coördinaten worden weergegeven als `(x, y)`. `x` is de horizontale positie,`y` de verticale positie.
+- Het **linkerbovenhoekpunt** van het venster is het beginpunt. De coördinaten van dit punt zijn `0,0`.
+- De **x-coördinaat** betekent 'zoveel pixels vanaf de linkerkant'. Hoe hoger het getal voor x des te verder naar rechts het is.
+- De **y-coördinaat** betekent 'zoveel pixels vanaf de bovenkant'. Hoe hoger het getal voor y des te verder naar beneden het is.
+
+Als je `print(mouseX, mouseY);` toevoegt aan `draw()` (bijvoorbeeld één regel boven de gekrulde haak onderaan) dan zie je linksonderin de coördinaten van je muis. 
+
+4. **De stam van de kerstboom vergroten en verplaatsen**
+    
+    Als je je rechthoek wil plaatsen op `(50, 100)`:
+    - `x = 50`: 50 pixels naar rechts.
+    - `y = 100`: 100 pixels naar beneden.
 ```javascript
 rect(50, 100, 200, 150); // (x, y, breedte, hoogte)
 ```
@@ -78,22 +74,6 @@ rect(50, 100, 200, 150); // (x, y, breedte, hoogte)
 - De breedte is 200 pixels.
 - De hoogte is 150 pixels.
 
-#### **5. Visuele gids**
-Als je een canvas maakt met:
-```javascript
-createCanvas(400, 400);
-```
-Dan ziet het er ongeveer zo uit:
-```
-(0, 0)        (400, 0)
- +------------------+
- |                  |
- |                  |
- |                  |
- |                  |
- +------------------+
-(0, 400)      (400, 400)
-```
 
 ---
 
@@ -113,6 +93,7 @@ Geef nu je kerstboom wat kleur om er wat leven in te blazen!
      strokeWeight(4); // Maak de randen dikker
      
      fill(139, 69, 19); // Bruin
+     fill(0, 128, 0); // Groen
      fill(34, 139, 34); // Groen
      ```
 
