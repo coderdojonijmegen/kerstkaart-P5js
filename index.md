@@ -24,9 +24,9 @@ We maken de kerstkaart met P5.js. Volg de handleiding stap voor stap en speel bi
 
 2. **Begin aan je kerstkaart.** 
 
-    Laten we beginnen door de achtergrond zwart te maken. Dat doe je door de functie `background()` een waarde van 0 te geven.
-
-    Maak je kerstkaart passend door de nummers in `createCanvas(400, 400)` te veranderen. 
+    - Laten we beginnen door de achtergrond zwart te maken. Dat doe je door de functie `background()` een waarde van 0 te geven.
+    - Voor wat we zo gaan doen is het belangrijk dat `background()` in `setup()` staat en niet in `draw()`. Selecteer die hele regel, knip en plak hem op een regel direct onder `createCanvas()`.
+    - Maak je kerstkaart passend door de nummers in `createCanvas(400, 400)` te veranderen. 
     
     Je kunt ook de nummers vervangen door `windowWidth` en `windowHeight`, dan past het altijd, dus ook als je het venster later groter maakt:
 
@@ -38,18 +38,18 @@ We maken de kerstkaart met P5.js. Volg de handleiding stap voor stap en speel bi
 
 3. **Begin met een kerstboom tekenen**:
    - Een kerstboom heeft een stam en groene takken.
-   - Voor de stam kunnen we een rechthoek tekenen met de functie `rect()`:
+   - Voor de stam kunnen we een rechthoek tekenen met de functie `rect()`. Zet deze code in het script, ná `background()`:
     ```javascript
-    rect(175, 300, 50, 100); // x, y, breedte, hoogte
+    rect(90, 100, 30, 20); // x, y, breedte, hoogte
     ```
-   - De takken kun je tekenen met een driehoek (of met drie driehoeken half over elkaar heen). Gebruik daarvoor `triangle()`:
-
-   ```javascript
-   triangle(100,10, 60,100, 120,100); // top, links, rechts
-   ```
+   - De takken kun je tekenen met een driehoek. Gebruik daarvoor `triangle()`:
+    ```javascript
+    triangle( 70,100, 140,100, 105,10 ); // links, rechts, top
+    ```
 
 4. **Run je code**! Zie je een kerstboom? Goed gedaan! 🎉
 
+---
 
 ### Uitleg van coördinaten in P5.js 🖼️
 
@@ -57,70 +57,98 @@ Zoals je ziet gebruikt P5.js een **coördinatenstelsel** om vormen te tekenen op
 
 - Coördinaten worden weergegeven als `(x, y)`. `x` is de horizontale positie,`y` de verticale positie.
 - Het **linkerbovenhoekpunt** van het venster is het beginpunt. De coördinaten van dit punt zijn `0,0`.
-- De **x-coördinaat** betekent 'zoveel pixels vanaf de linkerkant'. Hoe hoger het getal voor x des te verder naar rechts het is.
-- De **y-coördinaat** betekent 'zoveel pixels vanaf de bovenkant'. Hoe hoger het getal voor y des te verder naar beneden het is.
+- **x** betekent 'zoveel pixels vanaf de linkerkant'. Hoe groter het getal voor x des te verder naar rechts het is.
+- **y** betekent 'zoveel pixels vanaf de bovenkant'. Hoe groter het getal voor y des te verder naar beneden het is.
 
-Als je `print(mouseX, mouseY);` toevoegt aan `draw()` (bijvoorbeeld één regel boven de gekrulde haak onderaan) dan zie je linksonderin de coördinaten van je muis. 
+Als je `print(mouseX, mouseY);` toevoegt aan `draw()` dan zie je linksonderin de coördinaten van je muis als je die over je animatie beweegt. 
 
-4. **De stam van de kerstboom vergroten en verplaatsen**
+---
+
+5. **Maak de kerstboom een heel stuk groter! 🎄**
     
-    Als je je rechthoek wil plaatsen op `(50, 100)`:
-    - `x = 50`: 50 pixels naar rechts.
-    - `y = 100`: 100 pixels naar beneden.
-```javascript
-rect(50, 100, 200, 150); // (x, y, breedte, hoogte)
-```
-- `(50, 100)` is de **linkerbovenhoek** van de rechthoek.
-- De breedte is 200 pixels.
-- De hoogte is 150 pixels.
+    Maak de kerstboom bijna even hoog als het venster. Begin met de takken.
 
+    - Een driehoek teken je door in `triangle()` de coördinaten op te geven van drie hoekpunten.
+    - Om een mooie grote driehoek te tekenen moet je even zoeken naar de juiste getallen. Het is een kwestie van uitproberen. Verander dus de coördinaten voor de drie punten in ```triangle()```.
+        ```javascript
+        triangle( x,y, x,y, x,y );
+        ```
+    - Als je wil kun je je boom ook tekenen met drie overlappende driehoeken van verschillende grootte, door nog twee regels met ```triangle()``` toe te voegen. 
+
+6. **Verplaats de stam 🪵**
+
+    - Om de rechthoek weer onder de driehoek te plaatsen verander je de eerste twee argumenten van `rect()`:
+        - het eerste getal is `x`, het aantal pixels naar rechts
+        - het tweede getal is `y`, het aantal pixels naar beneden.
+        - Deze coördinaten zijn de **linkerbovenhoek** van de rechthoek.
+
+    - Om de grootte van de rechthoek te veranderen pas je de laatste twee argumenten van `rect()` aan.
+       ```javascript
+       rect(x, y, breedte, hoogte);
+       ```
 
 ---
 
 
-## Stap 2: Kleur je kerstkaart 🌈
+## Stap 2: Kleur je kerstkaart in 🌈
 Geef nu je kerstboom wat kleur om er wat leven in te blazen!
 
 1. **Wat betekenen `fill()` en `stroke()`?**
-   - `fill(r, g, b)` geeft de binnenkleur.
+   - Met `fill(r, g, b)` geef je de vormen een kleur.
    - `stroke(r, g, b)` bepaalt de randkleur.
    - `strokeWeight()` maakt de rand dikker of dunner.
 
-2. **Probeer dit:**
-   - Voeg dit toe na `background(200)` in de code:
+    Je kunt kleuren opgeven met een getal tussen 0 en 255. 255 betekent 'helemaal aan' en 0 betekent 'helemaal uit'. Dus als je bijvoorbeeld een vorm fel rood wil kleuren, dan zet je er een `fill()` boven met rood vol aan en groen en blauw op 0:
+    ```javascript
+     fill(255, 0, 0);
+    ```
+
+2. **Probeer het:**
+   - Voeg dit toe na `background(0)` in de code:
      ```javascript
      stroke(255, 0, 0); // Rode randen
      strokeWeight(4); // Maak de randen dikker
      
-     fill(139, 69, 19); // Bruin
-     fill(0, 128, 0); // Groen
-     fill(34, 139, 34); // Groen
+     fill(255, 200, 255); // lichtroze
      ```
 
-3. **Speel met de kleuren!**
-   - Probeer andere getallen bij `fill()` (bijvoorbeeld blauw `fill(0, 0, 255)` of lichtblauw `fill(200, 200, 255)`).
+3. **Ronde randen**
+   - Als je dat mooier vindt, kun je `strokeJoin(ROUND);` gebruiken om de boom afgeronde randen te geven.
+   - Als je een vorm helemaal geen rand wil geven dan kun je er `noStroke();` boven zetten.
+
+4. **Speel met de kleuren!**
+   - Probeer andere getallen bij `fill()` (bijvoorbeeld bruin `fill(139, 69, 19);`).
+   - Geef de stam, de takken en de rand elk een andere kleur.
+   - Op de website <a href="https://rgbcolorpicker.com/" target="_blank">rgbcolorpicker.com</a> kun je gemakkelijk kleuren uitkiezen.
 
 ---
 
-## Stap 3: Voeg kerstballen toe! 🎅
+## Stap 3: Voeg kerstballen toe! 🎅🔮
 Laten we kerstballen toevoegen als je klikt met de muis.
 
-1. **Schrijf deze code in je `draw()` functie:**
+1. **Kopiëer deze code en plak hem onderaan je script:**
    ```javascript
    function mousePressed() {
-     let r = random(255); // Random rood
-     let g = random(255); // Random groen
-     let b = random(255); // Random blauw
-     let size = random(10, 30); // Random grootte
+
+     let r = random(255); // willekeurig rood
+     let g = random(255); // willekeurig groen
+     let b = random(255); // willekeurig blauw
+
+     let grootte = random(10, 30); // willekeurige grootte
 
      fill(r, g, b); // Gebruik de random kleuren
      noStroke(); // Geen rand
-     ellipse(mouseX, mouseY, size); // Een bal op de muispositie
+
+     circle(mouseX, mouseY, grootte); // Teken een bal op de muispositie
    }
    ```
+   (Zorg dat je deze code helemaal onderaan zet, dus ná de gekrulde haak `}` die de `draw()`-functie afsluit.)
 
-2. **Klik op de boom!**
+2. **Klik op de boom! 🌲**
    - Zie je hoe elke klik een kerstbal toevoegt?
+   - `mousePressed()` is een functie die P5.js uitvoert elke keer dat je op de muis klikt.
+   - De functie `random()` geeft een willekeurig getal tussen 0 en het nummer dat je opgeeft. Elke kerstbal krijgt dus andere mix van kleuren.
+   - Als je twee getallen opgeeft bij `random()` dan krijg je een willekeurig getal tussen die twee waarden. Op die manier zijn de kerstballen dus steeds een andere grootte, maar niet kleiner dan 10 pixels en niet groter dan 30.
 
 ---
 
@@ -128,19 +156,23 @@ Laten we kerstballen toevoegen als je klikt met de muis.
 Een kerstkaart is niet compleet zonder een kerstwens!
 
 1. **Gebruik de `text()` functie:**
-   - Voeg dit toe aan de `setup()` functie:
+   - Voeg dit toe aan de `setup()` functie, ónder het tekenen van je kerstboom:
      ```javascript
-     fill(255, 255, 0); // Gele tekst
-     textSize(74); // Maak de tekst groot
-     text("Fijne feestdagen!", 50, 50); // Tekst en positie
+     noStroke();                    // geen rand
+     textSize(30);                  // grootte van de letters
+     fill(246, 246, 255);           // tekstkleur
+     text("Fijne kerst!", 50, 50);  // Tekst en positie
      ```
 
 2. **Run je code**:
    - Zie je de tekst bovenaan? 🎉
 
+3. **Maak de tekst groot en kleurig**
+    - Hoe groter het getal in `textSize();` des te groter de tekst groter. Maak je kerstwens lekker beeldvullend!
+    - Verander de coördinaten in `text()` om de tekst in het midden van je kerstkaart te zetten. Gebruik `height/2` als de y-positie om de tekst automatisch in het midden van het venster te zetten.
+    - Pas `fill()` aan om de kleur van de tekst wat meer kerstig te maken. 
+
 ---
-
-
 
 
 ### **Wat is een object in P5.js?** 🛠️
@@ -236,119 +268,63 @@ Hier zijn twee optionele stappen die je kunt volgen om je kerstanimatie nog spec
 
 ---
 
-## **Optionele Stap 6: Exporteer je animatie als een GIF** 🎥
+## **Optionele Stap 6: Laat een belletje klinken bij sneeuwvlokken** 🔔
 
-Als je een account aanmaakt op [p5js.org](https://editor.p5js.org/signup) dan kun je je schets opslaan en de link naar familie en vrienden sturen.
-Wat ook kan, is je kerstkaart-animatie opslaan als een bewegend plaatje (GIF), zodat je die kunt rondsturen. Hier is hoe dat werkt!
-
-1. **Voeg de p5.js library "ccapture.js" toe**:
-   - Ga naar de HTML-pagina van je project door linksbovenaan op het pijltje te klikken naast `sketch.js`.
-   Klik op `index.html` en voeg daar deze regel toe in het `<head>`-gedeelte (kopiëer en plak de hele regel, dat scheelt een boel moeite en dan maak je geen typefouten):
-     ```html
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/ccapture.js/1.1.0/CCapture.all.min.js"></script>
-     ```
-
-2. **Code toevoegen om je animatie op te nemen:**
-   - Voeg de volgende code bovenaan je script toe:
-     ```javascript
-     let capturer; // Voor de GIF-opname
-     let recording = false; // Om te weten wanneer je opneemt
-     ```
-
-   - Pas je `setup()` functie aan:
-     ```javascript
-     function setup() {
-       createCanvas(400, 400);
-       capturer = new CCapture({ format: 'gif', framerate: 30 });
-     }
-     ```
-
-   - Voeg een toetsenbordactie toe om te beginnen of te stoppen met opnemen:
-     ```javascript
-     function keyPressed() {
-       if (key === 'R' || key === 'r') { // Druk op 'R' om op te nemen
-         if (!recording) {
-           capturer.start();
-           recording = true;
-           console.log("Recording started!");
-         } else {
-           capturer.stop();
-           capturer.save();
-           recording = false;
-           console.log("Recording stopped and saved!");
-         }
-       }
-     }
-     ```
-
-   - Voeg dit toe aan je `draw()` functie om de frames op te nemen:
-     ```javascript
-     if (recording) {
-       capturer.capture(canvas); // Neem het canvas op
-     }
-     ```
-
-3. **Start de opname**:
-   - Druk op de "R"-toets terwijl je animatie draait.
-   - Druk opnieuw op "R" om de opname te stoppen en je GIF op te slaan. Je browser downloadt het bestand automatisch.
-
----
-
-## **Optionele Stap 7: Laat een belletje klinken bij sneeuwvlokken** 🔔
-
-Wil je een vrolijk belgeluid horen als een sneeuwvlok uit beeld verdwijnt? Hier is hoe je dat doet!
+Wil je een vrolijk belgeluid horen als een sneeuwvlok op de grond valt? Hier is hoe je dat doet!
 
 1. **Download een belgeluid**:
    - Zoek een gratis belgeluid (bijvoorbeeld van [freesound.org](https://freesound.org)) en download het in MP3- of WAV-formaat.
-   - Voeg het geluidsbestand toe aan je project (bijvoorbeeld `bel.mp3`).
+   - Sla het geluidsbestand op op je computer (bijvoorbeeld als `bel.wav`).
 
-2. **Voeg de p5.sound library toe**:
-   - Ga naar de HTML-pagina van je project en voeg deze regel toe in het `<head>`-gedeelte:
-     ```html
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
-     ```
+2. **Voeg het geluid toe aan je project**:
+   - Klik in je P5.js-editor op het pijltje onder de afspeelknop, dus naast 'sketch.js'. Je ziet nu de bestanden van je animatie. Klik op de **+** bovenaan het lijstje en kies voor 'upload file'. Sleep je geluidsbestand naar het venster dat nu opent (of klik erop om een venster te openen waarmee je je bestand kunt zoeken).  
 
 3. **Laad en speel het geluid in je code**:
-   - Voeg dit bovenaan je script toe:
+   - Voeg dit helemaal bovenaan je script toe:
      ```javascript
-     let bellSound;
+     let geluid;
 
      function preload() {
-       bellSound = loadSound('bel.mp3'); // Zorg dat het bestand in je projectmap staat
+       geluid = loadSound('bel.wav');
      }
      ```
 
-   - Speel het geluid af als een sneeuwvlok uit beeld verdwijnt:
+   - Speel het geluid af als een sneeuwvlok uit beeld verdwijnt door `geluid.play()` toe te voegen aan het if-statement dat checkt of een sneeuwvlok de grond raakt: 
      ```javascript
-     // Stel dat je een array van sneeuwvlokken hebt genaamd "snowflakes"
-     for (let i = snowflakes.length - 1; i >= 0; i--) {
-       let flake = snowflakes[i];
-       flake.update(); // Update de positie van de sneeuwvlok
-
-       if (flake.y > height) { // Als de sneeuwvlok uit beeld gaat
-         snowflakes.splice(i, 1); // Verwijder de sneeuwvlok
-         bellSound.play(); // Speel het belgeluid
-       }
-     }
+     if (this.posY > windowHeight - 5) {
+        geluid.play(); // Speel het belgeluid
      ```
 
 4. **Test je animatie**:
-   - Run je code en luister naar het belletje elke keer dat een sneeuwvlok onderaan verdwijnt. 🎵
+   - Run je code en luister naar het belletje elke keer dat een sneeuwvlok onderaan neervalt. 🎵
+
+5. **Iets minder vaak graag 🙄**
+    - Ok dat zijn wel heel veel belletjes. Als je het belletje minder vaak wil horen, gebruik dan de `random()` functie om bijvoorbeeld een kans van 1 op de 20 te hebben dat het geluid te horen is:
+        ```javascript
+        if (random(20) < 1) {
+            geluid.play();
+        }
+        ```
 
 ---
 
-Met deze extra stappen kun je je animatie niet alleen interactief maken, maar ook delen als een GIF én een geluidseffect toevoegen voor extra kerstmagie. Veel plezier! 🎄✨
+Met deze extra stappen kun je je animatie niet alleen interactief maken, maar ook en geluidseffect toevoegen voor extra kerstmagie. Veel plezier! 🎄
 
 
+## **Optionele Stap 7: deel je kerstkaart met familie en vrienden! 🥰** 
 
-## Stap 5: Voeg je eigen magie toe ✨
-- Probeer andere tekst te schrijven met `text()`.
+   Als je een account aanmaakt op [p5js.org](https://editor.p5js.org/signup) dan kun je je schets opslaan en hem aan anderen laten zien.
+
+   - Klik rechtsbovenaan in het scherm van je animatie op 'sign up' om een account aan te maken.
+   - Als dat gelukt is, sla dan je animatie op.
+   Je kerstkaart krijgt dan een eigen weblink en die kun je naar familie en vrienden sturen!
+
+
+## **Voeg extra magie toe ✨**
 - Maak speciale kerstballen met verschillende vormen.
-
-
-
-
-
+- Geef sommige sneeuwvlokken de eigenschap (dus met een extra variabele in het object) dat ze *niet* neerslaan op de boom of de tekst. Je kunt op die manier met een if-statement zorgen dat die vlokken voor de boom en de tekst langs zweven.
+- Laat de hele tijd een kerstig achtergrondmuziekje spelen.
+- Als je nog meer mooie dingen wil maken met P5.js dan kan dat natuurlijk! Zie onze andere [instructie voor P5.js](https://coderdojo-nijmegen.nl/instructies/p5.js-art/).
 
 
 
