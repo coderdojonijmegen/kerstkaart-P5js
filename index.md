@@ -26,26 +26,23 @@ We maken de kerstkaart met P5.js. Volg de handleiding stap voor stap en speel bi
 
     - Laten we beginnen door de achtergrond zwart te maken. Dat doe je door de functie `background()` een waarde van 0 te geven.
     - Voor wat we zo gaan doen is het belangrijk dat `background()` in `setup()` staat en niet in `draw()`. Selecteer die hele regel, knip en plak hem op een regel direct onder `createCanvas()`.
-    - Maak je kerstkaart passend door de nummers in `createCanvas(400, 400)` te veranderen. 
-    
+    - Maak je kerstkaart passend door de nummers in `createCanvas(400, 400)` te veranderen.
     Je kunt ook de nummers vervangen door `windowWidth` en `windowHeight`, dan past het altijd, dus ook als je het venster later groter maakt:
-
-   ```javascript
-     createCanvas(windowWidth, windowHeight);
-    ```
-
-    Klik op de afspeelknop om te kijken of het goed werkt.
+      ```javascript
+      createCanvas(windowWidth, windowHeight);
+      ```
+    - Klik op de afspeelknop om te kijken of het goed werkt.
 
 3. **Begin met een kerstboom tekenen**:
    - Een kerstboom heeft een stam en groene takken.
-   - Voor de stam kunnen we een rechthoek tekenen met de functie `rect()`. Zet deze code in het script, ná `background()`:
-    ```javascript
-    rect(90, 100, 30, 20); // x, y, breedte, hoogte
-    ```
-   - De takken kun je tekenen met een driehoek. Gebruik daarvoor `triangle()`:
-    ```javascript
-    triangle( 70,100, 140,100, 105,10 ); // links, rechts, top
-    ```
+   - Voor de stam kunnen we een rechthoek tekenen met de functie `rect()`. Zet deze code in het script, ná `background()` en boven de gekrulde haak `}` die `setup()` afsluit:
+      ```javascript
+      rect(90, 100, 20, 20); // x, y, breedte, hoogte
+      ```
+    - De takken kun je tekenen met een driehoek. Gebruik daarvoor `triangle()`:
+      ```javascript
+      triangle( 60,100, 100,10, 140,100 ); // links, top, rechts
+      ```
 
 4. **Run je code**! Zie je een kerstboom? Goed gedaan! 🎉
 
@@ -57,10 +54,13 @@ Zoals je ziet gebruikt P5.js een **coördinatenstelsel** om vormen te tekenen op
 
 - Coördinaten worden weergegeven als `(x, y)`. `x` is de horizontale positie,`y` de verticale positie.
 - Het **linkerbovenhoekpunt** van het venster is het beginpunt. De coördinaten van dit punt zijn `0,0`.
-- **x** betekent 'zoveel pixels vanaf de linkerkant'. Hoe groter het getal voor x des te verder naar rechts het is.
-- **y** betekent 'zoveel pixels vanaf de bovenkant'. Hoe groter het getal voor y des te verder naar beneden het is.
+- **x** betekent 'zoveel pixels vanaf de linkerkant'. Hoe groter het getal voor x, des te verder naar rechts het is.
+- **y** betekent 'zoveel pixels vanaf de bovenkant'. Hoe groter het getal voor y, des te verder naar beneden het is.
 
-Als je `print(mouseX, mouseY);` toevoegt aan `draw()` dan zie je linksonderin de coördinaten van je muis als je die over je animatie beweegt. 
+Als je deze `print()` toevoegt aan `draw()` dan zie je linksonderin de coördinaten van je muis als je die over je animatie beweegt:
+```javascript
+print("x:", mouseX, "  y:", mouseY);
+```
 
 ---
 
@@ -119,7 +119,7 @@ Geef nu je kerstboom wat kleur om er wat leven in te blazen!
 4. **Speel met de kleuren!**
    - Probeer andere getallen bij `fill()` (bijvoorbeeld bruin `fill(139, 69, 19);`).
    - Geef de stam, de takken en de rand elk een andere kleur.
-   - Op de website <a href="https://rgbcolorpicker.com/" target="_blank">rgbcolorpicker.com</a> kun je gemakkelijk kleuren uitkiezen.
+   - Op de website <a href="https://rgbcolorpicker.com/" target="_blank">rgbcolorpicker.com</a> kun je gemakkelijk kleuren uitkiezen. Als je een Mac hebt, kun je de app Color Picker gebruiken.
 
 ---
 
@@ -150,6 +150,14 @@ Laten we kerstballen toevoegen als je klikt met de muis.
    - De functie `random()` geeft een willekeurig getal tussen 0 en het nummer dat je opgeeft. Elke kerstbal krijgt dus andere mix van kleuren.
    - Als je twee getallen opgeeft bij `random()` dan krijg je een willekeurig getal tussen die twee waarden. Op die manier zijn de kerstballen dus steeds een andere grootte, maar niet kleiner dan 10 pixels en niet groter dan 30.
 
+3. **Goudkleurige rand? 🌟**
+
+    Als je de kerstballen een goudkleurige rand wil geven, vervang `noStroke()' dan door:
+    ```javascript
+    paksneeuw.stroke(190,166,40);
+    paksneeuw.strokeWeight(3);
+    ```
+
 ---
 
 ## Stap 4: Voeg een kerstwens toe! 🎁
@@ -170,124 +178,220 @@ Een kerstkaart is niet compleet zonder een kerstwens!
 3. **Maak de tekst groot en kleurig**
     - Hoe groter het getal in `textSize();` des te groter de tekst groter. Maak je kerstwens lekker beeldvullend!
     - Verander de coördinaten in `text()` om de tekst in het midden van je kerstkaart te zetten. Gebruik `height/2` als de y-positie om de tekst automatisch in het midden van het venster te zetten.
-    - Pas `fill()` aan om de kleur van de tekst wat meer kerstig te maken. 
+    - Pas `fill()` aan om de kleur van de tekst wat meer kerstig te maken.
+
+4. **Kies je eigen lettertype! ✍🏼 𝒦ℰℛ𝒮𝒯**
+
+    - Zoek een leuk lettertype, bijvoorbeeld op [1001fonts.com](https://www.1001fonts.com/). 
+    - Als je er één gevonden hebt die je leuk lijkt, klik dan op 'download' en sla hem op op je computer.
+    - Waarschijnlijk komt het lettertype binnen als een zip-bestand en moet je het eerst uitpakken. Vraag één van de mentoren om hulp als dat niet lukt of als je niet weet hoe dat moet.
+
+5. **Voeg het lettertype toe aan je project**:
+   - Klik in je P5.js-editor op het pijltje `>` onder de afspeelknop, dus naast 'sketch.js'. Je ziet nu de bestanden van je animatie. 
+   - Klik op de **+** bovenaan het lijstje en kies voor 'upload file'. 
+   - Sleep je lettertype-bestand naar het venster dat nu opent (of klik op het venster om het bestand op te zoeken).
+   - Je ziet nu in het rijtje links het toegevoegde bestand. Klik er één keer op. Je kunt nu bovenaan de hele bestandsnaam selecteren en kopiëren (de naam eindigt op `.ttf` of `.otf`).
+
+6. **Laad en gebruik het lettertype in je code**:
+   - Ga terug naar je script door te klikken op 'sketch.js'.
+   - Nu gaan we eerst je letterype laden. Neem deze code over, helemaal bovenaan in je script en plak de naam van het lettertype in de functie `loadFont()`. Het zou er zo uit moeten zien:
+      ```javascript
+      let font = 'BerkshireSwash-Regular.ttf';
+      function preload() {
+        font = loadFont(font);
+      }
+      ```
+    - Nu het lettertype geladen is kun je P5.js laten weten dat je dat lettertype wil gebruiken voor je kerstwens. Zet dit commando in `setup()`, boven de regel met `text()` van daarstraks:
+      ```javascript
+      textFont(font); 
+      ```
+7. **Bewonder het resultaat 📝 😍**
 
 ---
 
+## Stap 5: Laat het sneeuwen! 🌨️ ❄️
 
-### **Wat is een object in P5.js?** 🛠️
+Nu wordt het pas echt interessant. We gaan het laten sneeuwen, en daarvoor gaan we **objecten** gebruiken.
 
-Een **object** in P5.js is een **manier om gegevens (informatie)** en **functies (acties)** te combineren in één pakket. Dit maakt het makkelijk om dingen zoals vormen, sneeuwvlokken of andere items in je animatie te beheren.
+Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨** naast 'clear' om het console-venster weg te klikken, en schuif het preview-venster wat verder naar rechts.
 
-#### **1. Waarom gebruiken we objecten?**
-Stel dat je een sneeuwvlok wilt maken. Een sneeuwvlok heeft:
-- **Eigenschappen**: Waar is de vlok? Hoe groot is hij?
-- **Gedrag**: Wat doet de vlok? (Bijvoorbeeld vallen.)
 
-In plaats van losse variabelen voor elke eigenschap te maken, kun je alles samenvoegen in een object.
+1. **Wat is een object? 🛠️** 
 
-#### **2. Hoe maak je een object in P5.js?**
-- **Manier 1: Een eenvoudig object**
-  ```javascript
-  let sneeuwvlok = {
-    x: 200, // Eigenschap: horizontale positie
-    y: 0,   // Eigenschap: verticale positie
-    size: 10, // Eigenschap: grootte
+    - Objecten zijn een manier om variabelen en functies bij elkaar te houden die bij één onderdeel in je programma horen. (In ons geval is dat een sneeuwvlok.)
 
-    // Gedrag: laat de vlok vallen
-    vallen: function() {
-      this.y += 2; // Beweeg de vlok 2 pixels omlaag
-    },
+2. **Waarom gebruiken we objecten?**
 
-    // Gedrag: teken de vlok
-    tekenen: function() {
-      ellipse(this.x, this.y, this.size); // Teken de vlok als een cirkel
-    }
-  };
-  ```
+    Een rondje tekenen is in P5.js heel makkelijk. Dat zag je net al bij de kerstballen. Om zo'n rondje als een sneeuwvlok naar beneden te laten gaan heeft hij een paar dingen nodig:
+    - **eigenschappen**: Waar is de vlok? Hoe groot is hij?
+    - **gedrag**: Wat kan de vlok doen? (Bijvoorbeeld vallen.)
 
-- **Manier 2: Gebruik een class**
-Een class is een blauwdruk om meerdere objecten te maken die hetzelfde gedrag hebben, bijvoorbeeld veel sneeuwvlokken.
-  ```javascript
-  class Sneeuwvlok {
-    constructor(x, y, size) {
-      this.x = x;
-      this.y = y;
-      this.size = size;
-    }
+    We kunnen variabelen maken om de x- en y-positie van dat rondje te onthouden en die positie elke keer dat `draw()` wordt uitgevoerd een klein beetje veranderen. Op die manier kunnen we rondjes naar beneden laten vallen.
 
-    vallen() {
-      this.y += 2;
-    }
+    Dat is best eenvoudig, maar het wordt veel ingewikkelder als we een flinke sneeuwbui willen. Dan hebben we een **paar honderd sneeuwvlokken** nodig die allemaal een eigen positie, grootte en snelheid hebben. Daarvoor hebben we ook honderden variabelen nodig en die willen we niet één voor één klaarzetten want dat is veel te veel werk.
 
-    tekenen() {
-      ellipse(this.x, this.y, this.size);
-    }
-  }
+    Daarom gaan we voor elke sneeuwvlok een apart object maken, zodat elke sneeuwvlok zelf kan onthouden waar hij is en weet waar hij heen moet.
 
-  // Maak een sneeuwvlok
-  let vlok = new Sneeuwvlok(200, 0, 10);
-  vlok.vallen();
-  vlok.tekenen();
-  ```
 
-#### **3. Belangrijke termen**
-- **Eigenschappen**: Dit zijn de gegevens van een object, zoals `x`, `y`, of `size`.
-- **Methoden**: Dit zijn de functies binnen een object, zoals `vallen()` of `tekenen()`.
+3. **Maak een sjabloon voor je objecten**
 
-#### **4. Waarom is dit handig?**
-Als je 100 sneeuwvlokken wilt maken, kun je met een class gemakkelijk meerdere objecten beheren:
-```javascript
-let sneeuwvlokken = [];
+    - Een `class` is een soort **sjabloon**, in ons geval van hoe een sneeuwvlok eruitziet. We hoeven het sjabloon maar één keer te maken en dan kunnen we op basis daarvan heel veel objecten maken die hetzelfde zijn.
 
-function setup() {
-  createCanvas(400, 400);
-  for (let i = 0; i < 100; i++) {
-    sneeuwvlokken.push(new Sneeuwvlok(random(width), random(height), random(5, 15)));
-  }
-}
+    - We noemen onze class 'Sneeuwvlok'. Zet hem helemaal onderaan in je script, dus ná de gekrulde haak van `mousePressed`:
 
-function draw() {
-  background(0);
-  for (let vlok of sneeuwvlokken) {
-    vlok.vallen();
-    vlok.tekenen();
-  }
-}
-```
+      ```javascript
+      class Sneeuwvlok {
+
+        constructor() {
+          this.startX = random(windowWidth);
+          this.posX = this.startX;
+          this.posY = 0;
+          this.grootte = random(1, 5);
+          this.valsnelheid = random(1, 5);
+        }
+
+      }
+      ```
+    - De `constructor` is een functie die alleen uitgevoerd wordt als een nieuw object wordt aangemaakt op basis van deze `class`.
+    - In deze constructor zetten we variabelen klaar (in een `class` heten dat **attributen**). Dit zijn ze:
+      - `startX` voor de startpositie; elke sneeuwvlok begint op een andere willekeurige horizontale plek tussen 0 en de breedte van het venster.
+      - `posX` is steeds de horizontale positie. We kunnen straks de sneeuwvlok laten dwarrelen, maar hij begint op de startpositie.
+      - `posY` is de verticale positie en die begint bovenaan, dus op 0.
+      - `grootte` onthoud hoe groot deze sneeuwvlok is, en dat kan verschillen tussen 1 en 5 pixels breed.
+      - `valsnelheid` wisselt ook tussen de 1 en 5 pixels, zodat de sneeuwvlokken niet allemaal even snel vallen.
+    - `this.` voor elke variabele betekent 'we bedoelen de variabele van **dit** object'. We hebben tenslotte een heleboel sneeuwvlokken uit elkaar te houden!
+    
+4. **Geef de class functies**
+
+    - Nu we attributen hebben gedefiniëerd voor onze sneeuwvlokken, gaan we functies toevoegen. Functies in een `class` worden **methoden** genoemd. 
+    - Met de methoden zorgen we dat de sneeuwvlokken ook iets kunnen doén, namelijk vallen. 😆
+    - Zet de methoden `verplaats()` en `teken()` in de class, direct onder de gekrulde haak die de constructor afsluit:
+      ```javascript
+      verplaats() {
+        this.posY += this.valsnelheid;
+      }
+
+      teken() {
+        fill(255);
+        noStroke();
+        circle(this.posX, this.posY, this.grootte);
+      }
+      ```
+    - Elke keer dat `verplaats()` wordt aangeroepen, wordt de y-positie groter met het aantal in `this.valsnelheid`.
+    - Elke keer dat `teken()` wordt aangeroepen, wordt een witte cirkel (zonder rand) getekend op de positie `posX,posY` met de opgegeven grootte. 
+
+5. **Maak objecten op basis van de class**
+
+    - Helemaal bovenaan in je script zetten we een lijst klaar waar we nieuwe objecten aan toe kunnen voegen:
+      ```javascript
+      let sneeuwvlokken = [];
+      ```
+    - Nu kun je in `draw()` steeds opnieuw een nieuwe sneeuwvlok toevoegen aan de lijst:
+      ```javascript
+      sneeuwvlokken.push(new Sneeuwvlok());
+      ```
+
+6. **Laat maar komen die sneeuwstorm!** ☃️
+    - Om je sneeuwvlokken allemaal te laten zien, moeten we ze in `draw()` steeds opnieuw verplaatsen en tekenen. Dat doen we door met een for-loop alle objecten in de lijst af te gaan en de methoden van elk object aan te roepen:
+      ```javascript
+      for (var s in sneeuwvlokken) {
+
+        sneeuwvlokken[s].verplaats();
+        sneeuwvlokken[s].teken();
+
+      }
+      ```
+    - Run je code maar eens!
+    - Hé, maar nu zie je alleen maar strepen! Meer een soort natte sneeuw 😧 Dat kun je fiksen door bovenaan in `draw()` steeds opnieuw een nieuwe achtergrond te tekenen voordat je de sneeuwvlokken tekent:
+      ```javascript
+      background(0);
+      ```
+    - Run je code opnieuw! Mooier zo?
+    - Als je het twee keer zo hard wil laten sneeuwen, zet `sneeuwvlokken.push(..)` dan twee keer in `draw()`.
+
+7. **Sneeuw combineren met de rest van de kerstkaart ☃️**
+    - Nu hebben we er wel een probleem bij: de rest van de kerstkaart is verdwenen. Dat komt doordat we nu in `draw()` steeds de achtergrond opnieuw tekenen en alles dat we daarvoor getekend hebben uitwissen.
+    - We gaan dat probleem oplossen door een plaatje te bewaren van onze kerstkaart, en die steeds opnieuw te tekenen vóórdat we de sneeuwvlokken tekenen.
+    - Maak een variabele aan om het plaatje op op te slaan, helemaal bovenaan je script:
+      ```javascript
+      let kerstwens;
+      ```
+
+      In `setup()`, nadat je de kerstwens en kerstboom hebt getekend
+      ```javascript
+      // na : maak een kopie van het plaatje zonder sneeuw
+      kerstwens = createGraphics(width, height);
+      kerstwens.image(get(), 0, 0);
+      ```
+    - En in `draw()` laat je steeds opnieuw dat plaatje zien:
+      ```javascript
+      // in draw():
+      image(kerstwens, 0, 0);
+      ```
+    - Probeer het maar, als het goed is dan zie je nu de sneeuw over je kerstkaart heen!
+    - De kerstballen zijn nog steeds niet te zien, omdat die niet bestonden toen we het plaatje van je kerstkaart maakten.
+    ```javascript
+      kerstwens.fill(r, g, b);
+      kerstwens.stroke(190, 166, 40);
+      kerstwens.strokeWeight(3);
+      kerstwens.ellipse(mouseX, mouseY, size);
+    ```
+
+8. **Sneeuw hoort te dwarrelen, toch?** 
+
+    - `noise()`
+
+    ```javascript
+    // in de constructor:
+    this.xoff = random(30000);
+    // in verplaats():
+    this.posX = this.startX + map(noise(this.xoff), 0, 1, -250, 250);
+    this.xoff += 0.002;
+    ```
+    - als je hier meer over wil weten, kijk dan deze video van Dan Shiffman (wel in het Engels, maar automatische vertaling?)
 
 ---
 
-Objecten zijn super-handig voor geavanceerde animaties in P5.js! 🚀
+Gefeliciteerd! Je hebt een eigen kerstkaart-animatie gemaakt! 🎄✨
+
+Hier zijn een paar optionele stappen die je kunt volgen om je kerstanimatie nog specialer te maken, en hem te delen met je familie en vrienden om de kerstvreugde te verspreiden! 🎁
 
 ---
 
-Gefeliciteerd! Je hebt een eigen kerstkaart-animatie gemaakt. Deel hem met je familie en vrienden om de kerstvreugde te verspreiden! 🎄✨
+## Optionele Stap 6: deel je kerstkaart met familie en vrienden! 🥰
 
-Hier zijn twee optionele stappen die je kunt volgen om je kerstanimatie nog specialer te maken en te delen met familie! ✨
+   Als je een account aanmaakt op [p5js.org](https://editor.p5js.org/signup) dan kun je je schets opslaan en hem aan anderen laten zien.
 
----
+   - Klik rechtsbovenaan in het scherm van je animatie op 'sign up' om een account aan te maken.
+   - Als dat gelukt is, sla dan je animatie op.
+   Je kerstkaart krijgt dan een eigen weblink en die kun je naar familie en vrienden sturen!
+   - Eventueel kun je je hele project ook kopiëren naar [Openprocessing.org](https://openprocessing.org/). Daar opent je kerstkaart zich beeldvullend en ook daar krijg je een weblink als je een account aanmaakt.
+   - Voeg een extra kerstwens toe ('Groeten van ..').
 
-## **Optionele Stap 6: Laat een belletje klinken bij sneeuwvlokken** 🔔
+## Optionele Stap 7: Laat een belletje klinken bij sneeuwvlokken 🔔
 
 Wil je een vrolijk belgeluid horen als een sneeuwvlok op de grond valt? Hier is hoe je dat doet!
 
 1. **Download een belgeluid**:
-   - Zoek een gratis belgeluid (bijvoorbeeld van [freesound.org](https://freesound.org)) en download het in MP3- of WAV-formaat.
+   - Zoek online een gratis belgeluid (bijvoorbeeld op [bigsoundbank.com](https://bigsoundbank.com/)). Het werkt het best als het een heel kort geluidje is.
+   - Download het in MP3- of WAV-formaat.
    - Sla het geluidsbestand op op je computer (bijvoorbeeld als `bel.wav`).
 
 2. **Voeg het geluid toe aan je project**:
    - Klik in je P5.js-editor op het pijltje onder de afspeelknop, dus naast 'sketch.js'. Je ziet nu de bestanden van je animatie. Klik op de **+** bovenaan het lijstje en kies voor 'upload file'. Sleep je geluidsbestand naar het venster dat nu opent (of klik erop om een venster te openen waarmee je je bestand kunt zoeken).  
 
 3. **Laad en speel het geluid in je code**:
-   - Voeg dit helemaal bovenaan je script toe:
-     ```javascript
+   - Maak een variabele klaar om je geluid in op te slaan, helemaal bovenaan je script:
+        ```javascript
      let geluid;
-
-     function preload() {
-       geluid = loadSound('bel.wav');
-     }
      ```
+
+    - In de preload-functie zet je het geluid alvast klaar zodat het later afgespeeld kan worden. (`preload()` heb je waarschijnlijk al gedaan voor het lettertypes.)
+      ```javascript
+      function preload() {
+        geluid = loadSound('bel.wav');
+      }
+      ```
 
    - Speel het geluid af als een sneeuwvlok uit beeld verdwijnt door `geluid.play()` toe te voegen aan het if-statement dat checkt of een sneeuwvlok de grond raakt: 
      ```javascript
@@ -306,23 +410,18 @@ Wil je een vrolijk belgeluid horen als een sneeuwvlok op de grond valt? Hier is 
         }
         ```
 
----
+## Optionele stap 8: Laat het aantal objecten zien
+  - Als je wil weten hoeveel objecten er steeds in beeld zijn, kun je als tekst laten zien hoeveel objecten er in de lijst met sneeuwvlokken staan. Zet deze code onderaan in `draw()`: 
+    ```javascript
+    textFont('Arial', 13);
+    text(sneeuwvlokken.length + " sneeuwvlokken ", width - 5, 5);
+    ``` 
 
-Met deze extra stappen kun je je animatie niet alleen interactief maken, maar ook en geluidseffect toevoegen voor extra kerstmagie. Veel plezier! 🎄
-
-
-## **Optionele Stap 7: deel je kerstkaart met familie en vrienden! 🥰** 
-
-   Als je een account aanmaakt op [p5js.org](https://editor.p5js.org/signup) dan kun je je schets opslaan en hem aan anderen laten zien.
-
-   - Klik rechtsbovenaan in het scherm van je animatie op 'sign up' om een account aan te maken.
-   - Als dat gelukt is, sla dan je animatie op.
-   Je kerstkaart krijgt dan een eigen weblink en die kun je naar familie en vrienden sturen!
-
-
-## **Voeg extra magie toe ✨**
+## **Nog meer extra magie! ✨**
+- Laat een tekstje 'klik op mij' zien op de kerstboom zolang er nog niet geklikt is voor de kerstballen. Dit kun je doen met een extra variabele en een if-statement.
+- Laat de sneeuw ook pas vallen als er geklikt is.
 - Maak speciale kerstballen met verschillende vormen.
-- Geef sommige sneeuwvlokken de eigenschap (dus met een extra variabele in het object) dat ze *niet* neerslaan op de boom of de tekst. Je kunt op die manier met een if-statement zorgen dat die vlokken voor de boom en de tekst langs zweven.
+- Geef sommige sneeuwvlokken de eigenschap (dus met een extra variabele in het object) dat ze *niet* neerslaan op de boom of de tekst. Je kunt met een if-statement zorgen dat die vlokken voor de boom en de tekst langs zweven.
 - Laat de hele tijd een kerstig achtergrondmuziekje spelen.
 - Als je nog meer mooie dingen wil maken met P5.js dan kan dat natuurlijk! Zie onze andere [instructie voor P5.js](https://coderdojo-nijmegen.nl/instructies/p5.js-art/).
 
