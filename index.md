@@ -393,7 +393,7 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
 
 2. **De sneeuw laten liggen** ☃️
 
-    - Eigenlijk heb je pas echt iets aan sneeuw als het lekker blijft liggen. Laten we het zo maken dat onze sneeuwvlokken blijven liggen als een dik pak sneeuw op de boom, de letters en de grond!
+    - Eigenlijk heb je pas echt iets aan sneeuw als het lekker blijft liggen. Laten we zorgen voor een pak sneeuw op de boom, de letters en de grond!
     - Om te beginnen maken we een plaatje aan alleen voor het paksneeuw. Daarvoor maken een variabele aan, helemaal bovenaan ons script:
       ```javascript
       let paksneeuw;
@@ -407,10 +407,9 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
         image(kerstwens, 0, 0); // deze staat er dus al
         image(paksneeuw, 0, 0); // deze komt er nu bij
       ```
-    - In de functie `sneeuwruimen()` kijken wanneer een sneeuwvlok de boom of de tekst raakt. Dat plaatje gaan we in `draw()` elke keer laten zien, nádat we het plaatje met de boom en de kerstwens hebben neergezet:
+    - In de functie `sneeuwruimen()` kijken we wanneer een sneeuwvlok de boom of de tekst raakt. 
       ```javascript
-        image(kerstwens, 0, 0); // deze staat er dus al
-        image(paksneeuw, 0, 0); // deze komt er nu bij
+
       ```
 
 ---
@@ -421,7 +420,7 @@ Hier zijn een paar optionele stappen die je kunt volgen om je kerstanimatie nog 
 
 ---
 
-## Optionele Stap 7: deel je kerstkaart met familie en vrienden! 🥰
+## Optionele Stap 7: Deel je kerstkaart met familie en vrienden! 🥰
 
    Als je een account aanmaakt op [p5js.org](https://editor.p5js.org/signup) dan kun je je schets opslaan en hem aan anderen laten zien.
 
@@ -461,7 +460,8 @@ Wil je een vrolijk belgeluid horen als een sneeuwvlok op de grond valt? Hier is 
    - Speel het geluid af als een sneeuwvlok uit beeld verdwijnt door `geluid.play()` toe te voegen aan het if-statement dat checkt of een sneeuwvlok de grond raakt: 
      ```javascript
      if (this.posY > windowHeight - 5) {
-        geluid.play(); // Speel het belgeluid
+        geluid.play();
+     }
      ```
 
 4. **Test je animatie**:
