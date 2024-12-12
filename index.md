@@ -350,25 +350,33 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
 
 8. **Waarom sneeuwt het steeds langzamer?**
 
-    - Je ziet dat de animatie al gauw heel traag wordt. Dat komt doordat er in hoog tempo sneeuwvlokjes bij komen, ongeveer 60 per seconde (zo vaak wordt `draw()` uitgevoerd). 
+    - Je ziet dat de animatie al gauw heel traag wordt. Dat komt doordat er in hoog tempo sneeuwvlokjes bij komen, ongeveer 60 per seconde (zo vaak wordt `draw()` uitgevoerd).
+
     - De lijst waar al die objecten in wordt bijgehouden, de variabele `sneeuwvlokken`, wordt dus ook steeds langer.
+
     - De oplossing voor dit probleem is een **if-statement**. Daarmee kun je P5.js een vraag laten stellen. In dit geval is die vraag: is een sneeuwvlok al verder naar beneden gevallen dan de hoogte van mijn scherm? Als het antwoord *ja* is dan halen we dat object uit de `sneeuwvlokken`-lijst.
-    - We doen dat in een nieuwe methode `sneeuwruimen()` in de class `Sneeuwvlok`:
+
+    - We stoppen het if-statement in een nieuwe methode `sneeuwruimen()` in de class `Sneeuwvlok`:
       ```javascript
-      sneeuwruimen(s) {
-
+      sneeuwruimen() {
         if (this.posY > windowHeight) {
-
-          sneeuwvlokken.splice(s, 1);
-          
+          return true;
         }
-
       }
       ```
-    - Je ziet dat we het juiste object uit de lijst kunnen halen omdat we met de variabele `s` doorgeven welk nummer dit object in de lijst heeft.
-    - Nu hoef je alleen nog in `draw()` deze nieuwe methode aan te roepen, direct na de regel met `teken()`:
+    - `sneeuwruimen()` vertelt nu dus of het waar is dat dat sneeuwvlokje al gevallen is.
+    - Nu kunnen we in de for-loop in `draw()` deze nieuwe methode aanroepen, direct na de regel met `teken()`. Dat ziet er dan zo uit:
       ```javascript
-      sneeuwvlokken[s].sneeuwruimen(s);
+        for (var s in sneeuwvlokken) {
+          sneeuwvlokken[s].verplaats();
+          sneeuwvlokken[s].teken();
+
+          let gevallen = sneeuwvlokken[s].sneeuwruimen();
+          // als het vlokje gevallen is, verwijder het object dan uit de lijst
+          if (gevallen == true) {
+            sneeuwvlokken.splice(s, 1);
+          }
+        }
       ```
     - Werkt de animatie nu soepeler?
 
@@ -394,7 +402,7 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
 2. **De sneeuw laten liggen** ☃️
 
     - Eigenlijk heb je pas echt iets aan sneeuw als het lekker blijft liggen. Laten we zorgen voor een pak sneeuw op de boom, de letters en de grond!
-    - Om te beginnen maken we een plaatje aan alleen voor het paksneeuw. Daarvoor maken een variabele aan, helemaal bovenaan ons script:
+    - Om te beginnen maken we een variabele aan, helemaal bovenaan ons script:
       ```javascript
       let paksneeuw;
       ```
@@ -407,10 +415,43 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
         image(kerstwens, 0, 0); // deze staat er dus al
         image(paksneeuw, 0, 0); // deze komt er nu bij
       ```
-    - In de functie `sneeuwruimen()` kijken we wanneer een sneeuwvlok de boom of de tekst raakt. 
+    - In de functie `sneeuwruimen()` vragen we al of de sneeuwvlok al voorbij de hoogte van het scherm is. Daar voegen we nu aan toe of de sneeuwvlok de boom of de tekst raakt. 
+    - Dat doen we op een heel slimme manier: we vragen met de functie `get()` aan P5.js wat de kleur is áchter de sneeuwvlok. Als dat géén zwart is, dan zal de sneeuwvlok wel iets geraakt hebben!
+    - Voeg de volgende code toe ná het if-statement in `sneeuwruimen()` waarin we vragen : 
       ```javascript
-
+      let c = kerstwens.get(this.posX, this.posY);
+      if (brightness(c) != 0) {
+        return true;
+      }
+        ```
+    - Als we in `draw()` zien dat de sneeuwvlok gevallen is, dan voegen we hem toe aan het plaatje dat we net gemaakt hebben:
+      ```javascript
+      paksneeuw.noStroke();
+      paksneeuw.fill(255);
+      paksneeuw.circle(sneeuwvlokken[s].posX, sneeuwvlokken[s].posY, sneeuwvlokken[s].grootte);
       ```
+    - Dat doen we één regel boven de regel met `splice()`, want als we het object al verwijderd hebben dan weten we ook niet meer waar we die vlok getekend moet worden.
+    - Die hele for-loop ziet er dus nu zo uit:
+      ```javascript
+      for (var s in sneeuwvlokken) {
+        sneeuwvlokken[s].verplaats();
+        sneeuwvlokken[s].teken();
+
+        let gevallen = sneeuwvlokken[s].sneeuwruimen();
+        if (gevallen == true) {
+
+          // voeg het gevallen vlokje toe aan het plaatje
+          paksneeuw.noStroke();
+          paksneeuw.fill(255);
+          paksneeuw.circle(sneeuwvlokken[s].posX, sneeuwvlokken[s].posY, sneeuwvlokken[s].grootte);
+
+          // verwijder vlokje
+          sneeuwvlokken.splice(s, 1);
+          
+        }
+      }
+      ```
+    - Probeer het maar! Als het goed is blijft de sneeuw nu liggen, omdat we de gevallen sneeuwvlokken steeds toevoegen aan het plaatje, en dat plaatje laten we 
 
 ---
 
@@ -457,7 +498,7 @@ Wil je een vrolijk belgeluid horen als een sneeuwvlok op de grond valt? Hier is 
       }
       ```
 
-   - Speel het geluid af als een sneeuwvlok uit beeld verdwijnt door `geluid.play()` toe te voegen aan het if-statement dat checkt of een sneeuwvlok de grond raakt: 
+   - Speel het geluid af als een sneeuwvlok uit beeld verdwijnt door `geluid.play()` toe te voegen aan het if-statement in `sneeuwruimen()` dat checkt of een sneeuwvlok de grond raakt: 
      ```javascript
      if (this.posY > windowHeight - 5) {
         geluid.play();
