@@ -430,7 +430,7 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
       paksneeuw.fill(255);
       paksneeuw.circle(sneeuwvlokken[s].posX, sneeuwvlokken[s].posY, sneeuwvlokken[s].grootte);
       ```
-    - Dat doen we één regel boven de regel met `splice()`, want als we het object al verwijderd hebben dan weten we ook niet meer waar we die vlok getekend moet worden.
+    - Dat doen we één regel boven de regel met `splice()`, want als we het object eenmaal verwijderd hebben dan weten we niet meer waar die vlok getekend moet worden.
     - Die hele for-loop ziet er dus nu zo uit:
       ```javascript
       for (var s in sneeuwvlokken) {
@@ -445,9 +445,9 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
           paksneeuw.fill(255);
           paksneeuw.circle(sneeuwvlokken[s].posX, sneeuwvlokken[s].posY, sneeuwvlokken[s].grootte);
 
-          // verwijder vlokje
+          // verwijder vlokje uit de lijst
           sneeuwvlokken.splice(s, 1);
-          
+
         }
       }
       ```
@@ -498,23 +498,22 @@ Wil je een vrolijk belgeluid horen als een sneeuwvlok op de grond valt? Hier is 
       }
       ```
 
-   - Speel het geluid af als een sneeuwvlok uit beeld verdwijnt door `geluid.play()` toe te voegen aan het if-statement in `sneeuwruimen()` dat checkt of een sneeuwvlok de grond raakt: 
+   - Speel het geluid af als een sneeuwvlok ergens op valt door `geluid.play()` toe te voegen aan het if-statement in `draw()` dat checkt of een sneeuwvlok is gevallen: 
      ```javascript
-     if (this.posY > windowHeight - 5) {
-        geluid.play();
-     }
+     geluid.play();
      ```
 
 4. **Test je animatie**:
    - Run je code en luister naar het belletje elke keer dat een sneeuwvlok onderaan neervalt. 🎵
 
 5. **Iets minder vaak graag 🙄**
-    - Ok dat zijn wel heel veel belletjes. Als je het belletje minder vaak wil horen, gebruik dan de `random()` functie om bijvoorbeeld een kans van 1 op de 20 te hebben dat het geluid te horen is:
-        ```javascript
-        if (random(20) < 1) {
-            geluid.play();
-        }
-        ```
+    - Ok dat zijn wel heel veel belletjes. Als je het belletje minder vaak wil horen, gebruik dan een if-statement met de `random()`-functie om bijvoorbeeld een kans van 1 op 200 te hebben dat het geluid te horen is:
+      ```javascript
+      // laat soms een geluidje horen
+      if (random(200) < 1) {
+        geluid.play();
+      }
+      ```
 
 ## Optionele stap 9: Laat het aantal objecten zien
   - Als je het leuk vindt om te weten hoeveel sneeuwvlokken er steeds in beeld zijn, kun je als tekst laten zien hoeveel objecten er in de lijst met sneeuwvlokken staan. Zet deze code onderaan in `draw()`: 
