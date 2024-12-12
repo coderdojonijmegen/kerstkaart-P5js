@@ -1,6 +1,6 @@
 ---
 title: "Maak je eigen kerstkaart-animatie met P5.js! 🎄 🌟"
-date: 2024-12-03T20:51:01+02:00
+date: 2024-12-12T20:51:01+02:00
 draft: false
 toc: true
 headercolor: "teal-background"
@@ -154,8 +154,8 @@ Laten we kerstballen toevoegen als je klikt met de muis.
 
     Als je de kerstballen een goudkleurige rand wil geven, vervang `noStroke()' dan door:
     ```javascript
-    paksneeuw.stroke(190,166,40);
-    paksneeuw.strokeWeight(3);
+    stroke(190,166,40);
+    strokeWeight(3);
     ```
 
 ---
@@ -209,7 +209,7 @@ Een kerstkaart is niet compleet zonder een kerstwens!
 
 ---
 
-## Stap 5: Laat het sneeuwen! 🌨️ ❄️
+## Stap 5: Laat het sneeuwen! ❄️❄️❄️
 
 Nu wordt het pas echt interessant. We gaan het laten sneeuwen, en daarvoor gaan we **objecten** gebruiken.
 
@@ -269,6 +269,7 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
       ```javascript
       verplaats() {
         this.posY += this.valsnelheid;
+        this.posX += random(-2, 2);
       }
 
       teken() {
@@ -278,6 +279,7 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
       }
       ```
     - Elke keer dat `verplaats()` wordt aangeroepen, wordt de y-positie groter met het aantal in `this.valsnelheid`.
+    - We verplaatsen `posX` twee pixels naar links of naar rechts om de sneeuw een beetje te laten dwarrelen.  
     - Elke keer dat `teken()` wordt aangeroepen, wordt een witte cirkel (zonder rand) getekend op de positie `posX,posY` met de opgegeven grootte. 
 
 5. **Maak objecten op basis van de class**
@@ -307,8 +309,8 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
       background(0);
       ```
     - Run je code opnieuw! Mooier zo?
-    - Als je het twee keer zo hard wil laten sneeuwen, zet `sneeuwvlokken.push(..)` dan twee keer in `draw()`.
-
+    - Hoe kun je het harder laten sneeuwen? Er is een makkelijke manier om twee keer zo vaak een sneeuwvlok te maken...
+    
 7. **Sneeuw combineren met de rest van de kerstkaart ☃️**
     - Nu hebben we er wel een probleem bij: de rest van de kerstkaart is verdwenen. Dat komt doordat we nu in `draw()` steeds de achtergrond opnieuw tekenen en alles dat we daarvoor getekend hebben uitwissen.
     - We gaan dat probleem oplossen door een plaatje te bewaren van onze kerstkaart, en die steeds opnieuw te tekenen vóórdat we de sneeuwvlokken tekenen.
@@ -329,26 +331,83 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
       image(kerstwens, 0, 0);
       ```
     - Probeer het maar, als het goed is dan zie je nu de sneeuw over je kerstkaart heen!
-    - De kerstballen zijn nog steeds niet te zien, omdat die niet bestonden toen we het plaatje van je kerstkaart maakten.
-    ```javascript
-      kerstwens.fill(r, g, b);
-      kerstwens.stroke(190, 166, 40);
-      kerstwens.strokeWeight(3);
-      kerstwens.ellipse(mouseX, mouseY, size);
-    ```
+    - De kerstballen zijn nog steeds niet te zien, omdat die niet bestonden toen we het plaatje van je kerstkaart maakten. Dat kun je oplossen door ze aan dat plaatje toe te voegen. Dat doe je door `kerstwens.` voor de functies te zetten:
+      ```javascript
+        kerstwens.fill(r, g, b);
+        kerstwens.stroke(190, 166, 40);
+        kerstwens.strokeWeight(3);
+        kerstwens.ellipse(mouseX, mouseY, size);
+      ```
 
-8. **Sneeuw hoort te dwarrelen, toch?** 
+8. **Waarom sneeuwt het steeds langzamer?**
 
-    - `noise()`
+    - Je ziet dat de animatie al gauw heel traag wordt. Dat komt doordat er in hoog tempo sneeuwvlokjes bij komen, ongeveer 60 per seconde (zo vaak wordt `draw()` uitgevoerd). 
+    - De lijst waar al die objecten in wordt bijgehouden, de variabele `sneeuwvlokken`, wordt dus ook steeds langer.
+    - De oplossing voor dit probleem is een **if-statement**. Daarmee kun je P5.js een vraag laten stellen. In dit geval is die vraag: is een sneeuwvlok al verder naar beneden gevallen dan de hoogte van mijn scherm? Als het antwoord *ja* is dan halen we dat object uit de `sneeuwvlokken`-lijst.
+    - We doen dat in een nieuwe methode `sneeuwruimen()` in de class `Sneeuwvlok`:
+      ```javascript
+      sneeuwruimen(s) {
 
-    ```javascript
-    // in de constructor:
-    this.xoff = random(30000);
-    // in verplaats():
-    this.posX = this.startX + map(noise(this.xoff), 0, 1, -250, 250);
-    this.xoff += 0.002;
-    ```
-    - als je hier meer over wil weten, kijk dan deze video van Dan Shiffman (wel in het Engels, maar automatische vertaling?)
+        if (this.posY > windowHeight) {
+
+          sneeuwvlokken.splice(s, 1);
+          
+        }
+
+      }
+      ```
+    - Je ziet dat we het juiste object uit de lijst kunnen halen omdat we met de variabele `s` doorgeven welk nummer dit object in de lijst heeft.
+    - Nu hoef je alleen nog in `draw()` deze nieuwe methode aan te roepen, direct na de regel met `teken()`:
+      ```javascript
+      sneeuwvlokken[s].sneeuwruimen(s);
+      ```
+    - Werkt de animatie nu soepeler?
+
+
+## Stap 6: Mooiere sneeuw! 🌨️
+
+1. **Sneeuw hoort te dwarrelen, toch?** 
+
+    - We laten de sneeuw nu een klein beetje dwarrelen met de `random`-functie, maar het ziet er veel mooier uit als je `noise()` gebruikt.
+    - Voeg dit toe aan de constructor:
+      ```javascript
+      this.xoff = random(3000);
+      ```
+    - In `verplaats()`:
+      ```javascript
+      this.posX += random(-2, 2); // deze regel haal je weg
+      this.posX = this.startX + map(noise(this.xoff), 0, 1, -250, 250);
+      this.xoff += 0.002;
+      ```
+    - Je kunt de sneeuw wilder laten dwarrelen met een hogere waarde in de laatste regel, bijvoorbeeld 0.008.
+    - Als je meer wil weten over hoe `noise()` werkt, kijk dan [deze video over Perlin noise](https://www.youtube.com/watch?v=Qf4dIN99e2w) van Daniel Shiffman (in het Engels, maar je kunt de automatische vertaling en ondertitels aanzetten). Je kunt ook de voorbeelden op [p5js.org](https://p5js.org/reference/p5/noise/) bekijken.
+
+2. **De sneeuw laten liggen** ☃️
+
+    - Eigenlijk heb je pas echt iets aan sneeuw als het lekker blijft liggen. Laten we het zo maken dat onze sneeuwvlokken blijven liggen als een dik pak sneeuw op de boom, de letters en de grond!
+    - Om te beginnen maken we een plaatje aan alleen voor het paksneeuw. Daarvoor maken een variabele aan, helemaal bovenaan ons script:
+      ```javascript
+      let paksneeuw;
+      ```
+    - In `setup()` vertellen we P5.js dat `paksneeuw` een plaatje moet worden met dezelfde afmetingen als ons venster:
+      ```javascript
+      paksneeuw = createGraphics(width, height);
+      ```
+    - Dat plaatje gaan we in `draw()` elke keer laten zien, nádat we het plaatje met de boom en de kerstwens hebben neergezet:
+      ```javascript
+        image(kerstwens, 0, 0); // deze staat er dus al
+        image(paksneeuw, 0, 0); // deze komt er nu bij
+      ```
+    - In de functie `sneeuwruimen()` kijken wanneer een sneeuwvlok de boom of de tekst raakt. Dat plaatje gaan we in `draw()` elke keer laten zien, nádat we het plaatje met de boom en de kerstwens hebben neergezet:
+      ```javascript
+        image(kerstwens, 0, 0); // deze staat er dus al
+        image(paksneeuw, 0, 0); // deze komt er nu bij
+      ```
+
+
+
+  
+
 
 ---
 
@@ -358,7 +417,7 @@ Hier zijn een paar optionele stappen die je kunt volgen om je kerstanimatie nog 
 
 ---
 
-## Optionele Stap 6: deel je kerstkaart met familie en vrienden! 🥰
+## Optionele Stap 7: deel je kerstkaart met familie en vrienden! 🥰
 
    Als je een account aanmaakt op [p5js.org](https://editor.p5js.org/signup) dan kun je je schets opslaan en hem aan anderen laten zien.
 
@@ -368,7 +427,7 @@ Hier zijn een paar optionele stappen die je kunt volgen om je kerstanimatie nog 
    - Eventueel kun je je hele project ook kopiëren naar [Openprocessing.org](https://openprocessing.org/). Daar opent je kerstkaart zich beeldvullend en ook daar krijg je een weblink als je een account aanmaakt.
    - Voeg een extra kerstwens toe ('Groeten van ..').
 
-## Optionele Stap 7: Laat een belletje klinken bij sneeuwvlokken 🔔
+## Optionele Stap 8: Laat een belletje klinken bij sneeuwvlokken 🔔
 
 Wil je een vrolijk belgeluid horen als een sneeuwvlok op de grond valt? Hier is hoe je dat doet!
 
@@ -410,14 +469,15 @@ Wil je een vrolijk belgeluid horen als een sneeuwvlok op de grond valt? Hier is 
         }
         ```
 
-## Optionele stap 8: Laat het aantal objecten zien
-  - Als je wil weten hoeveel objecten er steeds in beeld zijn, kun je als tekst laten zien hoeveel objecten er in de lijst met sneeuwvlokken staan. Zet deze code onderaan in `draw()`: 
+## Optionele stap 9: Laat het aantal objecten zien
+  - Als je het leuk vindt om te weten hoeveel sneeuwvlokken er steeds in beeld zijn, kun je als tekst laten zien hoeveel objecten er in de lijst met sneeuwvlokken staan. Zet deze code onderaan in `draw()`: 
     ```javascript
     textFont('Arial', 13);
     text(sneeuwvlokken.length + " sneeuwvlokken ", width - 5, 5);
-    ``` 
+    ```
+  - Met een extra variabele kun je ook nog laten zien hoeveel sneeuwvlokken er in totaal zijn gevallen.
 
-## **Nog meer extra magie! ✨**
+## **Nog meer magie! ✨**
 - Laat een tekstje 'klik op mij' zien op de kerstboom zolang er nog niet geklikt is voor de kerstballen. Dit kun je doen met een extra variabele en een if-statement.
 - Laat de sneeuw ook pas vallen als er geklikt is.
 - Maak speciale kerstballen met verschillende vormen.
