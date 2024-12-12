@@ -318,11 +318,11 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
       ```javascript
       background(0);
       ```
-    - Run je code opnieuw! Mooier zo?
+    - Run je code opnieuw! Mooier zo? (Het klopt dat de rest van de kerstkaart nu weg is, dat gaan we zo fiksen. 👩🏻‍💻)
     - Hoe kun je het harder laten sneeuwen? Er is een makkelijke manier om twee keer zo vaak een sneeuwvlok te maken...
     
 7. **Sneeuw combineren met de rest van de kerstkaart ☃️**
-    - Nu hebben we er wel een probleem bij: de rest van de kerstkaart is verdwenen. Dat komt doordat we nu in `draw()` steeds de achtergrond opnieuw tekenen en alles dat we daarvoor getekend hebben uitwissen.
+    - Nu hebben we er dus wel een probleem bij: de rest van de kerstkaart is verdwenen. Dat komt doordat we nu in `draw()` steeds de achtergrond opnieuw tekenen en alles dat we daarvoor getekend hebben uitwissen.
     - We gaan dat probleem oplossen door een plaatje te bewaren van onze kerstkaart, en die steeds opnieuw te tekenen vóórdat we de sneeuwvlokken tekenen.
     - Maak een variabele aan om het plaatje op op te slaan, helemaal bovenaan je script:
       ```javascript
@@ -336,15 +336,16 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
       ```
     - En in `draw()` laat je steeds opnieuw dat plaatje zien:
       ```javascript
+      background(0); // deze regel mag je weer weghalen
       image(kerstwens, 0, 0);
       ```
     - Probeer het maar, als het goed is dan zie je nu de sneeuw over je kerstkaart heen!
-    - De kerstballen zijn nog steeds niet te zien, omdat die niet bestonden toen we het plaatje van je kerstkaart maakten. Dat kun je oplossen door ze aan dat plaatje toe te voegen. Dat doe je door `kerstwens.` voor de functies te zetten:
+    - De kerstballen zijn nog steeds niet te zien, omdat die niet bestonden toen we het plaatje van je kerstkaart maakten. Dat kun je oplossen door ze aan dat plaatje toe te voegen. Dat doe je door `kerstwens.` voor de functies te zetten in `mousePressed()`:
       ```javascript
         kerstwens.fill(r, g, b);
         kerstwens.stroke(190, 166, 40);
         kerstwens.strokeWeight(3);
-        kerstwens.ellipse(mouseX, mouseY, size);
+        kerstwens.circle(mouseX, mouseY, size);
       ```
 
 8. **Waarom sneeuwt het steeds langzamer?**
@@ -412,11 +413,6 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
         image(paksneeuw, 0, 0); // deze komt er nu bij
       ```
 
-
-
-  
-
-
 ---
 
 Gefeliciteerd! Je hebt een eigen kerstkaart-animatie gemaakt! 🎄✨
@@ -442,7 +438,7 @@ Wil je een vrolijk belgeluid horen als een sneeuwvlok op de grond valt? Hier is 
 (Je hebt hiervoor een account nodig op [p5js.org](https://editor.p5js.org/signup). Klik rechtsbovenaan je script op 'sign up' als je niet al ingelogd bent. Sla anders deze stap over.)
 
 1. **Download een belgeluid**:
-   - Zoek online een gratis belgeluid (bijvoorbeeld op [bigsoundbank.com](https://bigsoundbank.com/)). Het werkt het best als het een heel kort geluidje is.
+   - Vind online een belgeluidje (zoek bijvoorbeeld op [bigsoundbank.com](https://bigsoundbank.com/) met het woord 'bel'). Het werkt het best als het een heel kort geluidje is.
    - Download het in MP3- of WAV-formaat.
    - Sla het geluidsbestand op op je computer (bijvoorbeeld als `bel.wav`).
 
