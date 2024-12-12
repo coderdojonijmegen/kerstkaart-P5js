@@ -1,6 +1,6 @@
 ---
 title: "Maak je eigen kerstkaart-animatie met P5.js! 🎄 🌟"
-date: 2024-12-12T20:51:01+02:00
+date: 2024-12-03T20:51:01+02:00
 draft: false
 toc: true
 headercolor: "teal-background"
@@ -27,9 +27,16 @@ We maken de kerstkaart met P5.js. Volg de handleiding stap voor stap en speel bi
     - Laten we beginnen door de achtergrond zwart te maken. Dat doe je door de functie `background()` een waarde van 0 te geven.
     - Voor wat we zo gaan doen is het belangrijk dat `background()` in `setup()` staat en niet in `draw()`. Selecteer die hele regel, knip en plak hem op een regel direct onder `createCanvas()`.
     - Maak je kerstkaart passend door de nummers in `createCanvas(400, 400)` te veranderen.
-    Je kunt ook de nummers vervangen door `windowWidth` en `windowHeight`, dan past het altijd, dus ook als je het venster later groter maakt:
+    Je kunt ook de nummers vervangen door `windowWidth` en `windowHeight`, dan past het altijd, dus ook als je het venster later groter maakt.
+    - Je hele script ziet er dan zo uit:
       ```javascript
-      createCanvas(windowWidth, windowHeight);
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        background(0);
+      }
+
+      function draw() {
+      }
       ```
     - Klik op de afspeelknop om te kijken of het goed werkt.
 
@@ -164,13 +171,14 @@ Laten we kerstballen toevoegen als je klikt met de muis.
 Een kerstkaart is niet compleet zonder een kerstwens!
 
 1. **Gebruik de `text()` functie:**
-   - Voeg dit toe aan de `setup()` functie, ónder het tekenen van je kerstboom:
+   - Voeg dit toe aan de `setup()` functie, **ná het tekenen van je kerstboom**:
      ```javascript
      noStroke();                    // geen rand
      textSize(30);                  // grootte van de letters
      fill(246, 246, 255);           // tekstkleur
      text("Fijne kerst!", 50, 50);  // Tekst en positie
      ```
+    - (Als je deze regels bóven de `rect()`en `triangle()` zou zetten dan zou de kerstboom over je tekst heen kunnen vallen.)
 
 2. **Run je code**:
    - Zie je de tekst bovenaan? 🎉
@@ -181,6 +189,8 @@ Een kerstkaart is niet compleet zonder een kerstwens!
     - Pas `fill()` aan om de kleur van de tekst wat meer kerstig te maken.
 
 4. **Kies je eigen lettertype! ✍🏼 𝒦ℰℛ𝒮𝒯**
+
+    - Je kunt een eigen lettertype gebruiken, maar daarvoor heb je wel een account nodig op [p5js.org](https://editor.p5js.org/signup). Klik rechtsbovenaan je script op 'sign up'. Als je daar nu geen zin in hebt, ga dan hieronder verder met de stap 'Laat het sneeuwen'.
 
     - Zoek een leuk lettertype, bijvoorbeeld op [1001fonts.com](https://www.1001fonts.com/). 
     - Als je er één gevonden hebt die je leuk lijkt, klik dan op 'download' en sla hem op op je computer.
@@ -319,15 +329,13 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
       let kerstwens;
       ```
 
-      In `setup()`, nadat je de kerstwens en kerstboom hebt getekend
+      In `setup()`, ná het tekenen van de kerstboom en kerstwens:
       ```javascript
-      // na : maak een kopie van het plaatje zonder sneeuw
       kerstwens = createGraphics(width, height);
       kerstwens.image(get(), 0, 0);
       ```
     - En in `draw()` laat je steeds opnieuw dat plaatje zien:
       ```javascript
-      // in draw():
       image(kerstwens, 0, 0);
       ```
     - Probeer het maar, als het goed is dan zie je nu de sneeuw over je kerstkaart heen!
@@ -430,6 +438,8 @@ Hier zijn een paar optionele stappen die je kunt volgen om je kerstanimatie nog 
 ## Optionele Stap 8: Laat een belletje klinken bij sneeuwvlokken 🔔
 
 Wil je een vrolijk belgeluid horen als een sneeuwvlok op de grond valt? Hier is hoe je dat doet!
+
+(Je hebt hiervoor een account nodig op [p5js.org](https://editor.p5js.org/signup). Klik rechtsbovenaan je script op 'sign up' als je niet al ingelogd bent. Sla anders deze stap over.)
 
 1. **Download een belgeluid**:
    - Zoek online een gratis belgeluid (bijvoorbeeld op [bigsoundbank.com](https://bigsoundbank.com/)). Het werkt het best als het een heel kort geluidje is.
