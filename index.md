@@ -531,7 +531,8 @@ Wil je een vrolijk belgeluid horen als een sneeuwvlok op de grond valt? Hier is 
 - Laat de hele tijd een kerstig achtergrondmuziekje spelen.
 - Als je nog meer mooie dingen wil maken met P5.js dan kan dat natuurlijk! Zie onze andere [instructie voor P5.js](https://coderdojo-nijmegen.nl/instructies/p5.js-art/).
 
-
+## Voorbeeld ##
+Als je een voorbeeld wil zien dan kun je [mijn kerstkaart bekijken](https://editor.p5js.org/Jaap7M/sketches/vjVI0_XpC).
 
 ## Licentie
 Deze instructies worden, net als alle andere instructies van CoderDojo Nijmegen, aangeboden onder een [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Licentie](http://creativecommons.org/licenses/by-nc-sa/4.0/).
