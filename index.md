@@ -64,10 +64,10 @@ Zoals je ziet gebruikt P5.js een **coördinatenstelsel** om vormen te tekenen op
 - **x** betekent 'zoveel pixels vanaf de linkerkant'. Hoe groter het getal voor x, des te verder naar rechts het is.
 - **y** betekent 'zoveel pixels vanaf de bovenkant'. Hoe groter het getal voor y, des te verder naar beneden het is.
 
-Als je deze `print()` toevoegt aan `draw()` dan zie je linksonderin de coördinaten van je muis als je die over je animatie beweegt:
+<!-- Als je deze `print()` toevoegt aan `draw()` dan zie je linksonderin de coördinaten van je muis als je die over je animatie beweegt:
 ```javascript
 print("x:", mouseX, "  y:", mouseY);
-```
+``` -->
 
 ---
 
@@ -93,7 +93,7 @@ print("x:", mouseX, "  y:", mouseY);
        ```javascript
        rect(x, y, breedte, hoogte);
        ```
-
+<!-- verplaatsen van de rechthoek komt vóór de driehoek. eerst één set getallen aanpassen zodat ze zien wat het doet. -->
 ---
 
 
@@ -345,7 +345,7 @@ Het helpt als je een beetje de ruimte hebt om te programmeren, dus klik op **∨
         kerstwens.fill(r, g, b);
         kerstwens.stroke(190, 166, 40);
         kerstwens.strokeWeight(3);
-        kerstwens.circle(mouseX, mouseY, size);
+        kerstwens.circle(mouseX, mouseY, grootte);
       ```
 
 8. **Waarom sneeuwt het steeds langzamer?**
